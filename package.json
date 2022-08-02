@@ -1,0 +1,41 @@
+{
+  "name": "webgl-flowers",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "WebGL flowers scene",
+  "author": "Oleksandr Popov (github.com/keaukraine/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keaukraine/webgl-flowers.git"
+  },
+  "keywords": [],
+  "homepage": "https://github.com/keaukraine/webgl-flowers#readme",
+  "dependencies": {
+    "dat.gui": "^0.7.9",
+    "quaternion-to-euler": "^0.5.0",
+    "webgl-framework": "^2.1.6"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-json": "^4.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@types/dat.gui": "^0.7.7",
+    "@types/node": "^10.11.0",
+    "http-server": "^14.1.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^1.31.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-livereload": "^1.0.4",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-typescript2": "^0.26.0",
+    "ts-node": "^8.6.2",
+    "tslib": "1.11.0",
+    "typescript": "^3.8.2"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
+    "server": "http-server -c-1",
+    "start": "rollup -c rollup.serve.config.ts -w"
+  }
+}

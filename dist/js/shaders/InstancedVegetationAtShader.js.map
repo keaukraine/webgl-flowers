@@ -1,0 +1,1 @@
+{"version":3,"file":"InstancedVegetationAtShader.js","sourceRoot":"","sources":["../../../src/shaders/InstancedVegetationAtShader.ts"],"names":[],"mappings":";;;AAAA,2EAAwE;AAExE,MAAa,2BAA4B,SAAQ,qDAAyB;IACtE,QAAQ;QACJ,KAAK,CAAC,QAAQ,EAAE,CAAC;QAEjB,IAAI,CAAC,kBAAkB,GAAG;;;;;;;;;;;;;;;cAepB,CAAC;IACX,CAAC;IAED,sBAAsB;QAClB,KAAK,CAAC,sBAAsB,EAAE,CAAC;IACnC,CAAC;CACJ;AAzBD,kEAyBC"}

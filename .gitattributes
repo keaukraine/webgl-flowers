@@ -1,0 +1,4 @@
+*.max filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.blend filter=lfs diff=lfs merge=lfs -text
+data/src/**/* filter=lfs diff=lfs merge=lfs -text
