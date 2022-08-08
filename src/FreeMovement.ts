@@ -22,41 +22,6 @@ export class FreeMovement {
     }
 
     private setupControls() {
-        document.addEventListener("dblclick", (event) => {
-            //if (event.code === "Enter"
-            {
-                if (this.mode === MovementMode.Predefined) {
-                    this.matCamera = mat4.clone(this.renderer.getViewMatrix());
-                    this.renderer.setCustomCamera(this.matCamera);
-                    this.mode = MovementMode.Free;
-
-                    mat4.invert(this.matInvCamera, this.matCamera);
-                    mat4.getTranslation(this.vec3Eye, this.matInvCamera);
-                    vec3.normalize(this.vec3Rotation, this.vec3Eye);
-                    vec3.scale(this.vec3Rotation, this.vec3Rotation, -1);
-
-                    this.fpsCamera = this.fpsCamera ?? new FpsCamera(this.options);
-                    this.fpsCamera.position = this.vec3Eye;
-
-                    const callback = (time: number) => {
-                        if (this.mode !== MovementMode.Free) {
-                            return;
-                        }
-
-                        this.fpsCamera!.update(16);
-                        this.matCamera = this.fpsCamera!.viewMat;
-                        this.renderer.setCustomCamera(this.matCamera, this.fpsCamera!.position, this.fpsCamera!.angles);
-
-                        requestAnimationFrame(callback);
-                    }
-                    callback(16);
-                } else {
-                    this.renderer.resetCustomCamera();
-                    this.mode = MovementMode.Predefined;
-                }
-            }
-        });
-
         document.addEventListener("keypress", (event) => {
             if (event.code === "Enter") {
                 if (this.mode === MovementMode.Predefined) {

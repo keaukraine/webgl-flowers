@@ -82,8 +82,8 @@ function initUI(): void {
     const stats = gui.addFolder("Stats");
     stats.add(renderer, "tiles", "")
         .name("Tiles visible")
-        .listen()
+        .listen();
     stats.add(renderer, "grassInstances", "")
         .name("Instances visible")
-        .listen()
+        .listen();
 }
