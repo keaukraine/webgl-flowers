@@ -4,6 +4,7 @@
 
 Live demo page is available here: https://keaukraine.github.io/webgl-flowers/index.html
 
+Demonstrates how to use WebGL 2 instanced rendering to draw a large amount of grass. For better performance, grass is rendered in tiles. Invisible tiles are culled.
 Works in latest Chrome, Firefox, Safari and Edge.
 
 # Used Libraries
@@ -18,7 +19,7 @@ Works in latest Chrome, Firefox, Safari and Edge.
 
 **The MIT License**
 
-Copyright (c) 2021 Oleksandr Popov, Dmytro Popov
+Copyright (c) 2022 Oleksandr Popov, Dmytro Popov
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
