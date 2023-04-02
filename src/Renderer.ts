@@ -116,7 +116,7 @@ export class Renderer extends BaseRenderer {
 
     private readonly WIND_STIFFNESS = 2.0;
     private readonly WIND_HEIGHT_COEFF = 0.06;
-    private readonly WIND_OFFSET = 11.0;
+    private readonly WIND_OFFSET = 7.0;
 
     private readonly GRASS_PATCH_SCALE = 28.0;
     private readonly DANDELION_SCALE = 39.0;

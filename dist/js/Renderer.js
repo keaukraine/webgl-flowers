@@ -65,7 +65,7 @@ class Renderer extends webgl_framework_1.BaseRenderer {
         this.BUTTERFLY_ANIMATION_PERIOD = 350;
         this.WIND_STIFFNESS = 2.0;
         this.WIND_HEIGHT_COEFF = 0.06;
-        this.WIND_OFFSET = 11.0;
+        this.WIND_OFFSET = 7.0;
         this.GRASS_PATCH_SCALE = 28.0;
         this.DANDELION_SCALE = 39.0;
         this.FLOWERS_SCALE = [2.2 / this.DANDELION_SCALE, 0.5 / this.DANDELION_SCALE];

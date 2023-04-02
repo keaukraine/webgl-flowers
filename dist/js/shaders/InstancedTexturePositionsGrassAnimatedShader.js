@@ -38,7 +38,7 @@ class InstancedTexturePositionsGrassAnimatedShader extends InstancedTexturePosit
 
             ${ShaderCommonFunctions_1.ShaderCommonFunctions.RANDOM}
             ${ShaderCommonFunctions_1.ShaderCommonFunctions.ROTATION}
-            ${ShaderCommonFunctions_1.ShaderCommonFunctions.GRADIENT_NOISE}
+            ${ShaderCommonFunctions_1.ShaderCommonFunctions.VALUE_NOISE}
 
             const float PI2 = 6.28318530718;
 

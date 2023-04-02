@@ -42,7 +42,7 @@ export class InstancedTexturePositionsGrassAnimatedShader extends InstancedTextu
 
             ${ShaderCommonFunctions.RANDOM}
             ${ShaderCommonFunctions.ROTATION}
-            ${ShaderCommonFunctions.GRADIENT_NOISE}
+            ${ShaderCommonFunctions.VALUE_NOISE}
 
             const float PI2 = 6.28318530718;
 

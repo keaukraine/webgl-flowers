@@ -258,8 +258,8 @@ class BaseShader {
  * @module glMatrix
  */
 // Configuration Constants
-var EPSILON = 0.000001;
-var ARRAY_TYPE = typeof Float32Array !== 'undefined' ? Float32Array : Array;
+var EPSILON$1 = 0.000001;
+var ARRAY_TYPE$1 = typeof Float32Array !== 'undefined' ? Float32Array : Array;
 if (!Math.hypot) Math.hypot = function () {
   var y = 0,
       i = arguments.length;
@@ -282,10 +282,10 @@ if (!Math.hypot) Math.hypot = function () {
  * @returns {mat3} a new 3x3 matrix
  */
 
-function create$2() {
-  var out = new ARRAY_TYPE(9);
+function create$2$1() {
+  var out = new ARRAY_TYPE$1(9);
 
-  if (ARRAY_TYPE != Float32Array) {
+  if (ARRAY_TYPE$1 != Float32Array) {
     out[1] = 0;
     out[2] = 0;
     out[3] = 0;
@@ -312,9 +312,9 @@ function create$2() {
  */
 
 function create$3() {
-  var out = new ARRAY_TYPE(16);
+  var out = new ARRAY_TYPE$1(16);
 
-  if (ARRAY_TYPE != Float32Array) {
+  if (ARRAY_TYPE$1 != Float32Array) {
     out[1] = 0;
     out[2] = 0;
     out[3] = 0;
@@ -531,7 +531,7 @@ function rotate$3(out, a, rad, axis) {
   var b10, b11, b12;
   var b20, b21, b22;
 
-  if (len < EPSILON) {
+  if (len < EPSILON$1) {
     return null;
   }
 
@@ -597,7 +597,7 @@ function rotate$3(out, a, rad, axis) {
  * @returns {mat4} out
  */
 
-function rotateX(out, a, rad) {
+function rotateX$1(out, a, rad) {
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a10 = a[4];
@@ -641,7 +641,7 @@ function rotateX(out, a, rad) {
  * @returns {mat4} out
  */
 
-function rotateY(out, a, rad) {
+function rotateY$1(out, a, rad) {
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a00 = a[0];
@@ -685,7 +685,7 @@ function rotateY(out, a, rad) {
  * @returns {mat4} out
  */
 
-function rotateZ(out, a, rad) {
+function rotateZ$1(out, a, rad) {
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a00 = a[0];
@@ -768,9 +768,9 @@ function frustum(out, left, right, bottom, top, near, far) {
  */
 
 function create$4() {
-  var out = new ARRAY_TYPE(3);
+  var out = new ARRAY_TYPE$1(3);
 
-  if (ARRAY_TYPE != Float32Array) {
+  if (ARRAY_TYPE$1 != Float32Array) {
     out[0] = 0;
     out[1] = 0;
     out[2] = 0;
@@ -801,7 +801,7 @@ function length(a) {
  */
 
 function fromValues$4(x, y, z) {
-  var out = new ARRAY_TYPE(3);
+  var out = new ARRAY_TYPE$1(3);
   out[0] = x;
   out[1] = y;
   out[2] = z;
@@ -815,7 +815,7 @@ function fromValues$4(x, y, z) {
  * @returns {vec3} out
  */
 
-function normalize(out, a) {
+function normalize$1(out, a) {
   var x = a[0];
   var y = a[1];
   var z = a[2];
@@ -882,7 +882,7 @@ var len = length;
  * @function
  */
 
-var forEach = function () {
+(function () {
   var vec = create$4();
   return function (a, stride, offset, count, fn, arg) {
     var i, l;
@@ -913,7 +913,7 @@ var forEach = function () {
 
     return a;
   };
-}();
+})();
 
 /**
  * 4 Dimensional Vector
@@ -927,9 +927,9 @@ var forEach = function () {
  */
 
 function create$5() {
-  var out = new ARRAY_TYPE(4);
+  var out = new ARRAY_TYPE$1(4);
 
-  if (ARRAY_TYPE != Float32Array) {
+  if (ARRAY_TYPE$1 != Float32Array) {
     out[0] = 0;
     out[1] = 0;
     out[2] = 0;
@@ -946,7 +946,7 @@ function create$5() {
  * @returns {vec4} out
  */
 
-function normalize$1(out, a) {
+function normalize$1$1(out, a) {
   var x = a[0];
   var y = a[1];
   var z = a[2];
@@ -976,7 +976,7 @@ function normalize$1(out, a) {
  * @function
  */
 
-var forEach$1 = function () {
+(function () {
   var vec = create$5();
   return function (a, stride, offset, count, fn, arg) {
     var i, l;
@@ -1009,7 +1009,7 @@ var forEach$1 = function () {
 
     return a;
   };
-}();
+})();
 
 /**
  * Quaternion
@@ -1023,9 +1023,9 @@ var forEach$1 = function () {
  */
 
 function create$6() {
-  var out = new ARRAY_TYPE(4);
+  var out = new ARRAY_TYPE$1(4);
 
-  if (ARRAY_TYPE != Float32Array) {
+  if (ARRAY_TYPE$1 != Float32Array) {
     out[0] = 0;
     out[1] = 0;
     out[2] = 0;
@@ -1087,7 +1087,7 @@ function slerp(out, a, b, t) {
   } // calculate coefficients
 
 
-  if (1.0 - cosom > EPSILON) {
+  if (1.0 - cosom > EPSILON$1) {
     // standard case (slerp)
     omega = Math.acos(cosom);
     sinom = Math.sin(omega);
@@ -1161,7 +1161,7 @@ function fromMat3(out, m) {
  * @function
  */
 
-var normalize$2 = normalize$1;
+var normalize$2 = normalize$1$1;
 /**
  * Sets a quaternion to represent the shortest rotation from one
  * vector to another.
@@ -1174,7 +1174,7 @@ var normalize$2 = normalize$1;
  * @returns {quat} out
  */
 
-var rotationTo = function () {
+(function () {
   var tmpvec3 = create$4();
   var xUnitVec3 = fromValues$4(1, 0, 0);
   var yUnitVec3 = fromValues$4(0, 1, 0);
@@ -1184,7 +1184,7 @@ var rotationTo = function () {
     if (dot$$1 < -0.999999) {
       cross(tmpvec3, xUnitVec3, a);
       if (len(tmpvec3) < 0.000001) cross(tmpvec3, yUnitVec3, a);
-      normalize(tmpvec3, tmpvec3);
+      normalize$1(tmpvec3, tmpvec3);
       setAxisAngle(out, tmpvec3, Math.PI);
       return out;
     } else if (dot$$1 > 0.999999) {
@@ -1202,7 +1202,7 @@ var rotationTo = function () {
       return normalize$2(out, out);
     }
   };
-}();
+})();
 /**
  * Performs a spherical linear interpolation with two control points
  *
@@ -1215,7 +1215,7 @@ var rotationTo = function () {
  * @returns {quat} out
  */
 
-var sqlerp = function () {
+(function () {
   var temp1 = create$6();
   var temp2 = create$6();
   return function (out, a, b, c, d, t) {
@@ -1224,7 +1224,7 @@ var sqlerp = function () {
     slerp(out, temp1, temp2, 2 * t * (1 - t));
     return out;
   };
-}();
+})();
 /**
  * Sets the specified quaternion with values corresponding to the given
  * axes. Each axis is a vec3 and is expected to be unit length and
@@ -1236,8 +1236,8 @@ var sqlerp = function () {
  * @returns {quat} out
  */
 
-var setAxes = function () {
-  var matr = create$2();
+(function () {
+  var matr = create$2$1();
   return function (out, view, right, up) {
     matr[0] = right[0];
     matr[3] = right[1];
@@ -1250,7 +1250,7 @@ var setAxes = function () {
     matr[8] = -view[2];
     return normalize$2(out, fromMat3(out, matr));
   };
-}();
+})();
 
 /**
  * 2 Dimensional Vector
@@ -1264,9 +1264,9 @@ var setAxes = function () {
  */
 
 function create$8() {
-  var out = new ARRAY_TYPE(2);
+  var out = new ARRAY_TYPE$1(2);
 
-  if (ARRAY_TYPE != Float32Array) {
+  if (ARRAY_TYPE$1 != Float32Array) {
     out[0] = 0;
     out[1] = 0;
   }
@@ -1286,7 +1286,7 @@ function create$8() {
  * @function
  */
 
-var forEach$2 = function () {
+(function () {
   var vec = create$8();
   return function (a, stride, offset, count, fn, arg) {
     var i, l;
@@ -1315,7 +1315,7 @@ var forEach$2 = function () {
 
     return a;
   };
-}();
+})();
 
 class BaseRenderer {
     constructor() {
@@ -1389,9 +1389,9 @@ class BaseRenderer {
         rotate$3(this.mMMatrix, this.mMMatrix, 0, [1, 0, 0]);
         translate$2(this.mMMatrix, this.mMMatrix, [tx, ty, tz]);
         scale$3(this.mMMatrix, this.mMMatrix, [sx, sy, sz]);
-        rotateX(this.mMMatrix, this.mMMatrix, rx);
-        rotateY(this.mMMatrix, this.mMMatrix, ry);
-        rotateZ(this.mMMatrix, this.mMMatrix, rz);
+        rotateX$1(this.mMMatrix, this.mMMatrix, rx);
+        rotateY$1(this.mMMatrix, this.mMMatrix, ry);
+        rotateZ$1(this.mMMatrix, this.mMMatrix, rz);
         multiply$3(this.mMVPMatrix, this.mVMatrix, this.mMMatrix);
         multiply$3(this.mMVPMatrix, this.mProjMatrix, this.mMVPMatrix);
     }
@@ -1572,8 +1572,8 @@ class DiffuseShader extends BaseShader {
  * @module glMatrix
  */
 // Configuration Constants
-var EPSILON$1 = 0.000001;
-var ARRAY_TYPE$1 = typeof Float32Array !== 'undefined' ? Float32Array : Array;
+var EPSILON = 0.000001;
+var ARRAY_TYPE = typeof Float32Array !== 'undefined' ? Float32Array : Array;
 if (!Math.hypot) Math.hypot = function () {
   var y = 0,
       i = arguments.length;
@@ -1596,10 +1596,10 @@ if (!Math.hypot) Math.hypot = function () {
  * @returns {mat4} a new 4x4 matrix
  */
 
-function create() {
-  var out = new ARRAY_TYPE$1(16);
+function create$2() {
+  var out = new ARRAY_TYPE(16);
 
-  if (ARRAY_TYPE$1 != Float32Array) {
+  if (ARRAY_TYPE != Float32Array) {
     out[1] = 0;
     out[2] = 0;
     out[3] = 0;
@@ -1628,7 +1628,7 @@ function create() {
  */
 
 function clone(a) {
-  var out = new ARRAY_TYPE$1(16);
+  var out = new ARRAY_TYPE(16);
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -1875,7 +1875,7 @@ function rotate(out, a, rad, axis) {
   var b10, b11, b12;
   var b20, b21, b22;
 
-  if (len < EPSILON$1) {
+  if (len < EPSILON) {
     return null;
   }
 
@@ -1941,7 +1941,7 @@ function rotate(out, a, rad, axis) {
  * @returns {mat4} out
  */
 
-function rotateX$1(out, a, rad) {
+function rotateX(out, a, rad) {
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a10 = a[4];
@@ -1985,7 +1985,7 @@ function rotateX$1(out, a, rad) {
  * @returns {mat4} out
  */
 
-function rotateY$1(out, a, rad) {
+function rotateY(out, a, rad) {
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a00 = a[0];
@@ -2029,7 +2029,7 @@ function rotateY$1(out, a, rad) {
  * @returns {mat4} out
  */
 
-function rotateZ$1(out, a, rad) {
+function rotateZ(out, a, rad) {
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a00 = a[0];
@@ -2103,7 +2103,7 @@ function lookAt(out, eye, center, up) {
   var centery = center[1];
   var centerz = center[2];
 
-  if (Math.abs(eyex - centerx) < EPSILON$1 && Math.abs(eyey - centery) < EPSILON$1 && Math.abs(eyez - centerz) < EPSILON$1) {
+  if (Math.abs(eyex - centerx) < EPSILON && Math.abs(eyey - centery) < EPSILON && Math.abs(eyez - centerz) < EPSILON) {
     return identity(out);
   }
 
@@ -2177,9 +2177,9 @@ function lookAt(out, eye, center, up) {
  */
 
 function create$1() {
-  var out = new ARRAY_TYPE$1(3);
+  var out = new ARRAY_TYPE(3);
 
-  if (ARRAY_TYPE$1 != Float32Array) {
+  if (ARRAY_TYPE != Float32Array) {
     out[0] = 0;
     out[1] = 0;
     out[2] = 0;
@@ -2225,7 +2225,7 @@ function scale(out, a, b) {
  * @returns {vec3} out
  */
 
-function normalize$3(out, a) {
+function normalize(out, a) {
   var x = a[0];
   var y = a[1];
   var z = a[2];
@@ -2251,7 +2251,7 @@ function normalize$3(out, a) {
  * @returns {vec3} out
  */
 
-function transformMat4(out, a, m) {
+function transformMat4$1(out, a, m) {
   var x = a[0],
       y = a[1],
       z = a[2];
@@ -2275,7 +2275,7 @@ function transformMat4(out, a, m) {
  * @function
  */
 
-var forEach$3 = function () {
+(function () {
   var vec = create$1();
   return function (a, stride, offset, count, fn, arg) {
     var i, l;
@@ -2306,7 +2306,7 @@ var forEach$3 = function () {
 
     return a;
   };
-}();
+})();
 
 /**
  * 4 Dimensional Vector
@@ -2319,10 +2319,10 @@ var forEach$3 = function () {
  * @returns {vec4} a new 4D vector
  */
 
-function create$7() {
-  var out = new ARRAY_TYPE$1(4);
+function create() {
+  var out = new ARRAY_TYPE(4);
 
-  if (ARRAY_TYPE$1 != Float32Array) {
+  if (ARRAY_TYPE != Float32Array) {
     out[0] = 0;
     out[1] = 0;
     out[2] = 0;
@@ -2340,7 +2340,7 @@ function create$7() {
  * @returns {vec4} out
  */
 
-function transformMat4$1(out, a, m) {
+function transformMat4(out, a, m) {
   var x = a[0],
       y = a[1],
       z = a[2],
@@ -2364,8 +2364,8 @@ function transformMat4$1(out, a, m) {
  * @function
  */
 
-var forEach$4 = function () {
-  var vec = create$7();
+(function () {
+  var vec = create();
   return function (a, stride, offset, count, fn, arg) {
     var i, l;
 
@@ -2397,7 +2397,7 @@ var forEach$4 = function () {
 
     return a;
   };
-}();
+})();
 
 class DiffuseColoredShader extends DiffuseShader {
     constructor() {
@@ -2450,7 +2450,7 @@ class CameraPositionInterpolator {
         this._reverse = false;
         this._cameraPosition = create$1();
         this._cameraRotation = create$1();
-        this._matrix = create();
+        this._matrix = create$2();
     }
     get cameraPosition() {
         return this._cameraPosition;
@@ -2519,9 +2519,9 @@ class CameraPositionInterpolator {
         this._cameraRotation[1] = start.rotation[1] + this._timer * (end.rotation[1] - start.rotation[1]);
         this._cameraRotation[2] = start.rotation[2] + this._timer * (end.rotation[2] - start.rotation[2]);
         identity(this.matrix);
-        rotateX$1(this.matrix, this.matrix, this._cameraRotation[0] - Math.PI / 2.0);
-        rotateZ$1(this.matrix, this.matrix, this._cameraRotation[1]);
-        rotateY$1(this.matrix, this.matrix, this._cameraRotation[2]);
+        rotateX(this.matrix, this.matrix, this._cameraRotation[0] - Math.PI / 2.0);
+        rotateZ(this.matrix, this.matrix, this._cameraRotation[1]);
+        rotateY(this.matrix, this.matrix, this._cameraRotation[2]);
         translate(this.matrix, this.matrix, [-this._cameraPosition[0], -this._cameraPosition[1], -this._cameraPosition[2]]);
     }
 }
@@ -2760,18 +2760,18 @@ const ShaderCommonFunctions = {
     // Copyright © 2013 Inigo Quilez
     // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     // https://www.youtube.com/c/InigoQuilez
-    // https://iquilezles.org    
+    // https://iquilezles.org
     float noise(vec2 st) {
         vec2 i = floor(st);
         vec2 f = fract(st);
-    
+
         vec2 u = f*f*(3.0-2.0*f);
-    
+
         return mix( mix( dot( random2(i + vec2(0.0,0.0) ), f - vec2(0.0,0.0) ),
                          dot( random2(i + vec2(1.0,0.0) ), f - vec2(1.0,0.0) ), u.x),
                     mix( dot( random2(i + vec2(0.0,1.0) ), f - vec2(0.0,1.0) ),
                          dot( random2(i + vec2(1.0,1.0) ), f - vec2(1.0,1.0) ), u.x), u.y);
-    }    
+    }
     `,
     ROTATION: `
     /** https://www.neilmendoza.com/glsl-rotation-about-an-arbitrary-axis/ */
@@ -2781,23 +2781,51 @@ const ShaderCommonFunctions = {
         float s = sin(angle);
         float c = cos(angle);
         float oc = 1.0 - c;
-        
+
         return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
                     oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
                     oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
                     0.0,                                0.0,                                0.0,                                1.0);
-    }  
+    }
 
     /** Optimized version to rotate only around Z axis */
     mat4 rotationAroundZ(float angle)
     {
         float s = sin(angle);
         float c = cos(angle);
-        
+
         return mat4(c,  -s,   0.0, 0.0,
                     s,   c,   0.0, 0.0,
                     0.0, 0.0, 1.0, 0.0,
                     0.0, 0.0, 0.0, 1.0);
+    }
+    `,
+    VALUE_NOISE: `
+    // https://www.shadertoy.com/view/lsf3WH
+    // The MIT License
+    // Copyright © 2013 Inigo Quilez
+    // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    // https://www.youtube.com/c/InigoQuilez
+    // https://iquilezles.org/
+
+    float hash(vec2 p)  // replace this by something better
+    {
+        p  = 50.0*fract( p*0.3183099 + vec2(0.71,0.113));
+        return -1.0+2.0*fract( p.x*p.y*(p.x+p.y) );
+    }
+
+    float noise( in vec2 p )
+    {
+        vec2 i = floor( p );
+        vec2 f = fract( p );
+
+        // vec2 u = f*f*(3.0-2.0*f); // original
+        vec2 u = f; // less contrast, faster
+
+        return mix( mix( hash( i + vec2(0.0,0.0) ),
+                         hash( i + vec2(1.0,0.0) ), u.x),
+                    mix( hash( i + vec2(0.0,1.0) ),
+                         hash( i + vec2(1.0,1.0) ), u.x), u.y);
     }
     `
 };
@@ -4042,7 +4070,7 @@ class InstancedTexturePositionsGrassAnimatedShader extends InstancedTexturePosit
 
             ${ShaderCommonFunctions.RANDOM}
             ${ShaderCommonFunctions.ROTATION}
-            ${ShaderCommonFunctions.GRADIENT_NOISE}
+            ${ShaderCommonFunctions.VALUE_NOISE}
 
             const float PI2 = 6.28318530718;
 
@@ -4478,8 +4506,8 @@ const FLOWERS = new Float32Array([
     -0.9989169986212127, -0.04652773222055871, 0.0,
     0.6033142620947886, -0.797503543034776, 0.0
 ]);
-const FLOWERS_POSITIONS = new Float32Array(FLOWERS.slice(0, FLOWERS.length / 2));
-const FLOWERS_ROTATIONS = new Float32Array(FLOWERS.slice(FLOWERS.length / 2));
+new Float32Array(FLOWERS.slice(0, FLOWERS.length / 2));
+new Float32Array(FLOWERS.slice(FLOWERS.length / 2));
 const TILES_FLOWERS = sortInstancesByTiles(FLOWERS, TILES_COUNT, SIZE, PADDING, CULLED_TILES);
 const GRASS1 = new Float32Array([
     -97.8327, 117.342, 0.69328,
@@ -5490,9 +5518,9 @@ class BoundingBoxVisibility {
      * @param renderer Renderer instance.
      */
     constructor(renderer) {
-        this.pointsBB = [create$7(), create$7(), create$7(), create$7(), create$7(), create$7(), create$7(), create$7()];
-        this.mMVPMatrix = create();
-        this.modelMatrix = create();
+        this.pointsBB = [create(), create(), create(), create(), create(), create(), create(), create()];
+        this.mMVPMatrix = create$2();
+        this.modelMatrix = create$2();
         this.renderer = renderer;
         identity(this.modelMatrix);
         rotate(this.modelMatrix, this.modelMatrix, 0, [1, 0, 0]);
@@ -5540,7 +5568,7 @@ class BoundingBoxVisibility {
         this.pointsBB[7][3] = 1.0;
         this.prepareCullingMatrix();
         for (let i = 0; i < 8; i++) {
-            transformMat4$1(this.pointsBB[i], this.pointsBB[i], this.mMVPMatrix);
+            transformMat4(this.pointsBB[i], this.pointsBB[i], this.mMVPMatrix);
         }
         result = true;
         for (let i = 0; i < 8; i++) {
@@ -5635,7 +5663,7 @@ class Renderer extends BaseRenderer {
         this.BUTTERFLY_ANIMATION_PERIOD = 350;
         this.WIND_STIFFNESS = 2.0;
         this.WIND_HEIGHT_COEFF = 0.06;
-        this.WIND_OFFSET = 11.0;
+        this.WIND_OFFSET = 7.0;
         this.GRASS_PATCH_SCALE = 28.0;
         this.DANDELION_SCALE = 39.0;
         this.FLOWERS_SCALE = [2.2 / this.DANDELION_SCALE, 0.5 / this.DANDELION_SCALE];
@@ -5661,7 +5689,7 @@ class Renderer extends BaseRenderer {
                 glareColor: [105 / 255, 105 / 255, 45 / 255],
                 glareBrightness: 0.8,
                 glareExponent: 2.5,
-                lightDir: normalize$3(this.vec3Temp, [1.0, 1.0, 1.0]),
+                lightDir: normalize(this.vec3Temp, [1.0, 1.0, 1.0]),
                 flowerColor: [255 / 255, 255 / 255, 255 / 255],
                 flowerColorBrightness: 1.0,
                 lightDiffuse: [255 / 255, 255 / 255, 255 / 255],
@@ -5703,7 +5731,7 @@ class Renderer extends BaseRenderer {
                 glareColor: [241 / 255, 133 / 255, 0 / 255],
                 glareBrightness: 0.85,
                 glareExponent: 22.5,
-                lightDir: normalize$3(this.vec3Temp, [-1.0, -1.0, 0.3]),
+                lightDir: normalize(this.vec3Temp, [-1.0, -1.0, 0.3]),
                 flowerColor: [255 / 255, 200 / 255, 180 / 255],
                 flowerColorBrightness: 0.35,
                 lightDiffuse: [255 / 255, 180 / 255, 120 / 255],
@@ -5745,7 +5773,7 @@ class Renderer extends BaseRenderer {
                 glareBrightness: 0.85,
                 glareExponent: 22.5,
                 noGlare: true,
-                lightDir: normalize$3(this.vec3Temp, [-1.0, -1.0, 0.3]),
+                lightDir: normalize(this.vec3Temp, [-1.0, -1.0, 0.3]),
                 flowerColor: [180 / 255, 180 / 255, 200 / 255],
                 flowerColorBrightness: 0.3,
                 lightDiffuse: [123 / 255, 120 / 255, 255 / 255],
@@ -5786,7 +5814,7 @@ class Renderer extends BaseRenderer {
                 glareColor: [255 / 255, 70 / 255, 0 / 255],
                 glareBrightness: 0.7,
                 glareExponent: 22.5,
-                lightDir: normalize$3(this.vec3Temp, [-1.0, -1.0, 0.3]),
+                lightDir: normalize(this.vec3Temp, [-1.0, -1.0, 0.3]),
                 flowerColor: [255 / 255, 144 / 255, 111 / 255],
                 flowerColorBrightness: 0.35,
                 lightDiffuse: [255 / 255, 160 / 255, 100 / 255],
@@ -5825,9 +5853,9 @@ class Renderer extends BaseRenderer {
         ];
         this.cameraMode = CameraMode.Random;
         this.currentRandomCamera = 0;
-        this.matViewInverted = create();
-        this.matViewInvertedTransposed = create();
-        this.matTemp = create();
+        this.matViewInverted = create$2();
+        this.matViewInvertedTransposed = create$2();
+        this.matTemp = create$2();
         this.cameraPosition = create$1();
         this.cameraRotation = create$1();
         this.CAMERAS = [
@@ -6561,9 +6589,9 @@ class FpsCamera {
         this._position = create$1();
         this.speed = 100;
         this.rotationSpeed = 0.025;
-        this._cameraMat = create();
-        this._viewMat = create();
-        this.projectionMat = create();
+        this._cameraMat = create$2();
+        this._viewMat = create$2();
+        this.projectionMat = create$2();
         this.pressedKeys = new Array();
         this.canvas = options.canvas;
         this.speed = (_a = options.movementSpeed) !== null && _a !== void 0 ? _a : 100;
@@ -6624,9 +6652,9 @@ class FpsCamera {
         if (this._dirty) {
             var mv = this._viewMat;
             identity(mv);
-            rotateX$1(mv, mv, this.angles[0] - Math.PI / 2.0);
-            rotateZ$1(mv, mv, this.angles[1]);
-            rotateY$1(mv, mv, this.angles[2]);
+            rotateX(mv, mv, this.angles[0] - Math.PI / 2.0);
+            rotateZ(mv, mv, this.angles[1]);
+            rotateY(mv, mv, this.angles[2]);
             translate(mv, mv, [-this.position[0], -this.position[1], -this.position[2]]);
             this._dirty = false;
         }
@@ -6660,10 +6688,10 @@ class FpsCamera {
         if (dir[0] !== 0 || dir[1] !== 0 || dir[2] !== 0) {
             let cam = this._cameraMat;
             identity(cam);
-            rotateX$1(cam, cam, this.angles[0]);
-            rotateZ$1(cam, cam, this.angles[1]);
+            rotateX(cam, cam, this.angles[0]);
+            rotateZ(cam, cam, this.angles[1]);
             invert(cam, cam);
-            transformMat4(dir, dir, cam);
+            transformMat4$1(dir, dir, cam);
             // Move the camera in the direction we are facing
             add(this.position, this.position, dir);
             this._dirty = true;
@@ -6680,7 +6708,7 @@ class FreeMovement {
     constructor(renderer, options) {
         this.renderer = renderer;
         this.options = options;
-        this.matCamera = create();
+        this.matCamera = create$2();
         this.matInvCamera = new Float32Array(16);
         this.vec3Eye = new Float32Array(3);
         this.vec3Rotation = new Float32Array(3);
@@ -6697,7 +6725,7 @@ class FreeMovement {
                     this.mode = MovementMode.Free;
                     invert(this.matInvCamera, this.matCamera);
                     getTranslation(this.vec3Eye, this.matInvCamera);
-                    normalize$3(this.vec3Rotation, this.vec3Eye);
+                    normalize(this.vec3Rotation, this.vec3Eye);
                     scale(this.vec3Rotation, this.vec3Rotation, -1);
                     this.fpsCamera = (_a = this.fpsCamera) !== null && _a !== void 0 ? _a : new FpsCamera(this.options);
                     this.fpsCamera.position = this.vec3Eye;
