@@ -12,6 +12,7 @@ Works in latest Chrome, Firefox, Safari and Edge.
 * Material Icons by Google used under Apache License https://design.google.com/icons/
 * gl-matrix, a high performance matrix and vector operations by Brandon Jones and Colin MacKenzie IV
 * WebGL initialization code is based on http://learningwebgl.com/ tutorials
+* Some GLSL functions are based on work by Inigo Quilez https://iquilezles.org/
 * Google Play and the Google Play logo are trademarks of Google LLC.
 * Loading spinner is from https://loading.io/css/
 
