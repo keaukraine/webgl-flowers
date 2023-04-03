@@ -42,7 +42,8 @@ export class InstancedTexturePositionsGrassAnimatedShader extends InstancedTextu
 
             ${ShaderCommonFunctions.RANDOM}
             ${ShaderCommonFunctions.ROTATION}
-            ${ShaderCommonFunctions.VALUE_NOISE}
+            ${ShaderCommonFunctions.VALUE_NOISE_CHEAP}
+            ${ShaderCommonFunctions.VALUE_NOISE2_CHEAP}
 
             const float PI2 = 6.28318530718;
 
@@ -65,41 +66,22 @@ export class InstancedTexturePositionsGrassAnimatedShader extends InstancedTextu
                 vec3 FragPos = vec3(model_matrix * vertex);
                 const float SPECULAR_POWER = 6.0;
                 const float ZERO = 0.0;
-                // const vec3 NORMAL = vec3(0.0, 0.0, 1.0);
                 float time3 =  noise(uTime.x * vertex.xy * .01);
                 vec3 vNormal2 = normalize(normal + time3 * 0.2).xyz; // w component of rm_Normal might be ignored, and implicitly converted to vec4 in uniform declaration
-                //vNormal2 *= time2 / 2.0;
-
                 vec3 viewDir = normalize(viewPos - FragPos);
-                //vec3 lightDir = normalize(lightPos - FragPos);
                 vec3 reflectDir = reflect(-lightDir.xyz, vNormal2);
                 float spec = pow(max(dot(viewDir, reflectDir), ZERO), uSpecularPower);
-                //const float specularStrength = 1.8;
-                //vec4 specularColor = specularStrength * spec * vec4(1.0, 1.0, 1.0, 1.0);
-                //vDiffuseColor = mix(vDiffuseColor, uSpecularColor, uSpecularStrength * spec);
                 vDiffuseColor += uSpecularColor * uSpecularStrength * spec;
                 // end specular ==============
 
-                //gl_Position = view_proj_matrix * vertex;
                 // animation ======================================
-                float time1 = uTime.x;
-                float time2 = uTime.y;
-                // float bendCoeff = pow(rm_Vertex.z * heightCoeff, stiffness);
                 float bendCoeff = pow(abs(rm_Vertex.z) * heightCoeff, stiffness);
-                float noiseX = noise(vertex.xy * .07);
-                float noiseY = noise(vertex.xy * .077);
-                float ox = time1 * noiseX * windOffset;
-                float oy = time2 * noiseY * windOffset;
-                // float oz = time * noise(vertex.xy * .075) * windOffset;
-                vertex.x += ox * bendCoeff;
-                vertex.y += oy * bendCoeff;
-                // vertex.z += oz * bendCoeff;
+                vec2 offsetsXY = noise2(vec4(vertex.xy, vertex.xy) * 0.07);
+                offsetsXY *= (uTime * windOffset) * bendCoeff;
+                vertex.xy += offsetsXY;
                 // end animation ==================================
+
                 gl_Position = view_proj_matrix * vertex;
-                //vDiffuseColor.r += bendCoeff * 5.; // FIXME
-
-
-                // gl_Position = view_proj_matrix * vertex;
                 vTexCoord = rm_TexCoord0;
             }`;
     }

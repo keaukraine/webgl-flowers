@@ -2800,6 +2800,9 @@ const ShaderCommonFunctions = {
                     0.0, 0.0, 0.0, 1.0);
     }
     `,
+    /**
+     * Fast and somewhat good enough.
+     */
     VALUE_NOISE: `
     // https://www.shadertoy.com/view/lsf3WH
     // The MIT License
@@ -2826,6 +2829,108 @@ const ShaderCommonFunctions = {
                          hash( i + vec2(1.0,0.0) ), u.x),
                     mix( hash( i + vec2(0.0,1.0) ),
                          hash( i + vec2(1.0,1.0) ), u.x), u.y);
+    }
+    `,
+    /**
+     * Clear repetitive horizontal and vertical patterns can be seen.
+     * Still good enough for low-frequency vertex stuff
+     */
+    VALUE_NOISE_CHEAP: `
+    // https://www.shadertoy.com/view/lsf3WH
+    // The MIT License
+    // Copyright © 2013 Inigo Quilez
+    // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    // https://www.youtube.com/c/InigoQuilez
+    // https://iquilezles.org/
+
+    float hash(vec2 p)  // replace this by something better
+    {
+        p  = 50.0*fract( p*0.3183099 + vec2(0.71,0.113));
+        return -1.0+2.0*fract( p.x*p.y ); // repetitive horizontal and vertical patterns can be seen
+    }
+
+    float noise( in vec2 p )
+    {
+        vec2 i = floor( p );
+        vec2 f = fract( p );
+
+        // vec2 u = f*f*(3.0-2.0*f); // original
+        vec2 u = f; // less contrast, faster
+
+        return mix( mix( hash( i + vec2(0.0,0.0) ),
+                         hash( i + vec2(1.0,0.0) ), u.x),
+                    mix( hash( i + vec2(0.0,1.0) ),
+                         hash( i + vec2(1.0,1.0) ), u.x), u.y);
+    }
+    `,
+    /**
+     * Generates 2 random values for 2 vec2 packed into single vec4.
+     */
+    VALUE_NOISE2: `
+    // https://www.shadertoy.com/view/lsf3WH
+    // The MIT License
+    // Copyright © 2013 Inigo Quilez
+    // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    // https://www.youtube.com/c/InigoQuilez
+    // https://iquilezles.org/
+
+    const vec4 VALUE_NOISE_VEC2_COEFFS = vec4(0.71,0.113, 0.77,0.111);
+
+    vec2 hash2(vec4 p)  // replace this by something better
+    {
+        p  = 50.0*fract( p*0.3183099 + VALUE_NOISE_VEC2_COEFFS);
+        return -1.0 + 2.0 * fract( vec2(
+            ( p.x*p.y*(p.x+p.y) ),
+            ( p.z*p.w*(p.z+p.w) )
+        ));
+    }
+
+    vec2 noise2( in vec4 p )
+    {
+        vec4 i = floor( p );
+        vec4 f = fract( p );
+        // vec2 u = f*f*(3.0-2.0*f); // original
+        vec4 u = f; // less contrast, faster
+        return mix( mix( hash2( i ),
+                         hash2( i + vec4(1.0,0.0,1.0,0.0) ), u.x),
+                    mix( hash2( i + vec4(0.0,1.0,0.0,1.0) ),
+                         hash2( i + vec4(1.0,1.0,1.0,1.0) ), u.x), u.y);
+    }
+    `,
+    /**
+     * Generates 2 random values for 2 vec2 packed into single vec4.
+     * Clear repetitive horizontal and vertical patterns can be seen.
+     * Still good enough for low-frequency vertex stuff
+     */
+    VALUE_NOISE2_CHEAP: `
+    // https://www.shadertoy.com/view/lsf3WH
+    // The MIT License
+    // Copyright © 2013 Inigo Quilez
+    // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    // https://www.youtube.com/c/InigoQuilez
+    // https://iquilezles.org/
+
+    const vec4 VALUE_NOISE_VEC2_COEFFS = vec4(0.71,0.113, 0.77,0.111);
+
+    vec2 hash2(vec4 p)  // replace this by something better
+    {
+        p  = 50.0*fract( p*0.3183099 + VALUE_NOISE_VEC2_COEFFS);
+        return -1.0 + 2.0 * fract( vec2(
+            ( p.x*p.y ), // repetitive horizontal and vertical patterns can be seen
+            ( p.z*p.w )
+        ));
+    }
+
+    vec2 noise2( in vec4 p )
+    {
+        vec4 i = floor( p );
+        vec4 f = fract( p );
+        // vec2 u = f*f*(3.0-2.0*f); // original
+        vec4 u = f; // less contrast, faster
+        return mix( mix( hash2( i ),
+                         hash2( i + vec4(1.0,0.0,1.0,0.0) ), u.x),
+                    mix( hash2( i + vec4(0.0,1.0,0.0,1.0) ),
+                         hash2( i + vec4(1.0,1.0,1.0,1.0) ), u.x), u.y);
     }
     `
 };
@@ -4070,7 +4175,8 @@ class InstancedTexturePositionsGrassAnimatedShader extends InstancedTexturePosit
 
             ${ShaderCommonFunctions.RANDOM}
             ${ShaderCommonFunctions.ROTATION}
-            ${ShaderCommonFunctions.VALUE_NOISE}
+            ${ShaderCommonFunctions.VALUE_NOISE_CHEAP}
+            ${ShaderCommonFunctions.VALUE_NOISE2_CHEAP}
 
             const float PI2 = 6.28318530718;
 
@@ -4093,41 +4199,22 @@ class InstancedTexturePositionsGrassAnimatedShader extends InstancedTexturePosit
                 vec3 FragPos = vec3(model_matrix * vertex);
                 const float SPECULAR_POWER = 6.0;
                 const float ZERO = 0.0;
-                // const vec3 NORMAL = vec3(0.0, 0.0, 1.0);
                 float time3 =  noise(uTime.x * vertex.xy * .01);
                 vec3 vNormal2 = normalize(normal + time3 * 0.2).xyz; // w component of rm_Normal might be ignored, and implicitly converted to vec4 in uniform declaration
-                //vNormal2 *= time2 / 2.0;
-
                 vec3 viewDir = normalize(viewPos - FragPos);
-                //vec3 lightDir = normalize(lightPos - FragPos);
                 vec3 reflectDir = reflect(-lightDir.xyz, vNormal2);
                 float spec = pow(max(dot(viewDir, reflectDir), ZERO), uSpecularPower);
-                //const float specularStrength = 1.8;
-                //vec4 specularColor = specularStrength * spec * vec4(1.0, 1.0, 1.0, 1.0);
-                //vDiffuseColor = mix(vDiffuseColor, uSpecularColor, uSpecularStrength * spec);
                 vDiffuseColor += uSpecularColor * uSpecularStrength * spec;
                 // end specular ==============
 
-                //gl_Position = view_proj_matrix * vertex;
                 // animation ======================================
-                float time1 = uTime.x;
-                float time2 = uTime.y;
-                // float bendCoeff = pow(rm_Vertex.z * heightCoeff, stiffness);
                 float bendCoeff = pow(abs(rm_Vertex.z) * heightCoeff, stiffness);
-                float noiseX = noise(vertex.xy * .07);
-                float noiseY = noise(vertex.xy * .077);
-                float ox = time1 * noiseX * windOffset;
-                float oy = time2 * noiseY * windOffset;
-                // float oz = time * noise(vertex.xy * .075) * windOffset;
-                vertex.x += ox * bendCoeff;
-                vertex.y += oy * bendCoeff;
-                // vertex.z += oz * bendCoeff;
+                vec2 offsetsXY = noise2(vec4(vertex.xy, vertex.xy) * 0.07);
+                offsetsXY *= (uTime * windOffset) * bendCoeff;
+                vertex.xy += offsetsXY;
                 // end animation ==================================
+
                 gl_Position = view_proj_matrix * vertex;
-                //vDiffuseColor.r += bendCoeff * 5.; // FIXME
-
-
-                // gl_Position = view_proj_matrix * vertex;
                 vTexCoord = rm_TexCoord0;
             }`;
     }
